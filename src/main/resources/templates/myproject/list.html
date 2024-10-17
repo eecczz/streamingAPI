@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YouTube</title>
+</head>
+<body>
+<h1>YouTube</h1>
+<a href="/myproject/image">
+    <button>동영상 업로드</button>
+</a>
+</body>
+<tbody>
+<tr th:each="memo : ${memoList}">
+    <div class="thumbnail">
+        <td>
+            <img th:id="${memo.mno}" th:value="${memo.videoUrl}" th:src="${memo.imageUrl}" width="300" height="135">
+        </td>
+    </div>
+
+    <div class="thumbnail">
+        <td>
+            <a th:href="@{'/myproject/read/'+${memo.mno}}">
+                <span th:text="${memo.memoText}"></span>
+            </a>
+        </td>
+    </div>
+</tr>
+</tbody>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+<script>
+    $(".thumbnail").on('mouseenter', 'img',function(){
+        var video = $('<video />', {
+            id: $(this).attr("id").toString(),
+            src: $(this).attr("value").toString()+'?v='+Math.random().toString(),
+            type: 'video/mp4',
+            autoplay: true,
+            width: 300,
+            height: 135,
+            controls: true
+        });
+        video.appendTo($(this).parent(".thumbnail"));
+        $(this).hide();
+    });
+
+    $(".thumbnail").on('mouseleave', 'video',function(){
+        $(this).parent(".thumbnail").find("img").show();
+        $(this).remove();
+    });
+
+    $(".thumbnail").on('click', 'img',function(){
+        $(location).attr('href','/myproject/read/'+$(this).attr('id').toString());
+    });
+
+    $(".thumbnail").on('click', 'video',function(){
+        $(location).attr('href','/myproject/read/'+$(this).attr('id').toString());
+    });
+
+</script>
+</html>

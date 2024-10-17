@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${memoDTO.memoText}"></title>
+</head>
+<body>
+<video id="result-video" th:src="${memoDTO.videoUrl}" controls autoplay width="720" height="480">
+</video>
+<div>
+    <span th:text="${memoDTO.memoText}"></span>
+</div>
+</body>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    var filename=$('#result-video').attr("src").split('/');
+    var filename1=filename[4];
+    var filename2=filename1.split('.');
+    var fileurl="https://demo-project-buc.s3.ap-northeast-2.amazonaws.com/output/"+filename2[0]+"/Default/HLS/"+filename2[0]+".m3u8";
+    $('#result-video').attr("src", fileurl);
+    if(Hls.isSupported())
+    {
+        var hls = new Hls();
+        hls.loadSource(fileurl);
+        hls.attachMedia(document.getElementById('result-video'));
+    }
+</script>
+</html>
