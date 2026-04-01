@@ -31,7 +31,6 @@ public class ProjectController {
 
     private final MemoService memoService;
 
-    @ResponseBody
     @GetMapping("/list")
     public List<MemoDTO> list(Model model)
     {
@@ -40,7 +39,6 @@ public class ProjectController {
         return memoDTOList;
     }
 
-    @ResponseBody
     @GetMapping("/read/{mno}")
     public MemoDTO read(@PathVariable("mno") Long mno, Model model)
     {

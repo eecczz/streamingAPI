@@ -23,4 +23,12 @@ public class Memo {
 
     @Column
     private String videoUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User uploader;
+
+    public void setUploader(User uploader) {
+        this.uploader = uploader;
+        uploader.getMemos().add(this);
+    }
 }
