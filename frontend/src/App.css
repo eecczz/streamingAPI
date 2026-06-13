@@ -578,10 +578,18 @@ button {
   cursor: pointer;
 }
 
-.player-overlay svg {
-  padding: 16px;
+.player-overlay-icon {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+}
+
+.player-overlay-icon svg {
+  margin-left: 4px;
 }
 
 .player-controls {

@@ -445,7 +445,11 @@ function VideoPlayer({ video }) {
         onEnded={() => setPlaying(false)}
       />
       <button className="player-overlay" type="button" onClick={togglePlay} aria-label={playing ? 'Pause' : 'Play'}>
-        {!playing && <Play size={34} fill="currentColor" />}
+        {!playing && (
+          <span className="player-overlay-icon">
+            <Play size={34} fill="currentColor" />
+          </span>
+        )}
       </button>
       <div className="player-controls" onClick={(event) => event.stopPropagation()}>
         <input
