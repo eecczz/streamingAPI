@@ -34,8 +34,8 @@ public class DemoDataSeeder implements CommandLineRunner {
         User creator = userRepository.save(User.builder()
                 .userName("creator")
                 .email("creator@example.com")
-                .channelName("Stream Lab")
-                .avatarUrl("https://api.dicebear.com/8.x/initials/svg?seed=SL")
+                .channelName("seondev")
+                .avatarUrl("https://api.dicebear.com/8.x/initials/svg?seed=seondev")
                 .channelDescription("Large-file upload, encoding, and streaming experiments.")
                 .build());
         User viewer = userRepository.save(User.builder()

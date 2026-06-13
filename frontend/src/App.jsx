@@ -73,7 +73,7 @@ function Header({ query, setQuery, currentUser, notifications, sidebarCollapsed,
         <Menu size={22} />
       </button>
       <button className="brand" type="button" onClick={onHome}>
-        <Play size={18} fill="currentColor" /> StreamTube
+        <Play size={18} fill="currentColor" /> seontube
       </button>
       <label className="search">
         <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search" />
@@ -342,7 +342,7 @@ function HomePage({ videos, selected, activeCategory, setActiveCategory, onSelec
         <div className="promo-media">
           <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="" />
           <div>
-            <strong>Streaming lab</strong>
+            <strong>seondev</strong>
             <h1>Large uploads, clean playback</h1>
           </div>
         </div>
@@ -756,19 +756,19 @@ function App() {
       const redirectedUserId = params.get('userId')
       const nextAuthError = params.get('authError')
       if (redirectedUserId) {
-        localStorage.setItem('streamtubeUserId', redirectedUserId)
+        localStorage.setItem('seontubeUserId', redirectedUserId)
         window.history.replaceState({}, '', window.location.pathname)
       }
       if (nextAuthError) {
         setAuthError('Google OAuth is not configured. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET, then restart the backend.')
         window.history.replaceState({}, '', window.location.pathname)
       }
-      const storedUserId = localStorage.getItem('streamtubeUserId')
+      const storedUserId = localStorage.getItem('seontubeUserId')
       const enabled = await api('/api/auth/google/enabled')
       const storedMember = storedUserId ? await api(`/api/auth/members/${storedUserId}`) : null
       const member = storedMember?.provider === 'GOOGLE' ? storedMember : null
       if (storedMember && storedMember.provider !== 'GOOGLE') {
-        localStorage.removeItem('streamtubeUserId')
+        localStorage.removeItem('seontubeUserId')
       }
       setGoogleEnabled(Boolean(enabled))
       setCurrentUser(member)
@@ -880,7 +880,7 @@ function App() {
 
   async function logout() {
     await fetch('http://localhost:8080/logout', { method: 'POST', credentials: 'include' }).catch(() => {})
-    localStorage.removeItem('streamtubeUserId')
+    localStorage.removeItem('seontubeUserId')
     setCurrentUser(null)
     setNotifications([])
     setView('home')
