@@ -3,10 +3,12 @@ package com.example.demo.myproject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Builder
-@Table(name="note")
-@ToString
+@Table(name = "note")
+@ToString(exclude = "targetUser")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -16,12 +18,25 @@ public class Note {
     private Long id;
 
     @Column(length = 1000)
-    private String noteText; // 타킷유저에게 어떤 행위 (댓/답글, 새 게시글)를 알릴 것인지, 즉 알림 내용은 service 에서 결정.
+    private String noteText;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User targetUser;
 
-    private String notingUserName; // 노팅유저이름도 service에서 결정.
+    private String notingUserName;
+
+    @Column(length = 50)
+    private String notificationType;
+
+    private Long sourceMemoId;
+    private Long sourceCommentId;
+
+    @Column(name = "notification_read")
+    @Builder.Default
+    private boolean readFlag = false;
+
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public void setTargetUser(User targetUser) {
         this.targetUser = targetUser;

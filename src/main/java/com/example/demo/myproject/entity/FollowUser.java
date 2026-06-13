@@ -8,12 +8,12 @@ import java.util.List;
 
 @Entity
 @Builder
-@Table(name="followUser")
-@ToString
+@Table(name = "follow_user")
+@ToString(exclude = {"followers", "followings"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FollowUser { // User - Follow 다대다의 중간다리 (다대일-일대다로 쪼개기)
+public class FollowUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,8 +22,10 @@ public class FollowUser { // User - Follow 다대다의 중간다리 (다대일-
     private String userName;
 
     @OneToMany(mappedBy = "followUser", cascade = CascadeType.ALL)
-    private List<Follower> followers = new ArrayList<>(); // 나를 구독
+    @Builder.Default
+    private List<Follower> followers = new ArrayList<>();
 
     @OneToMany(mappedBy = "followUser", cascade = CascadeType.ALL)
-    private List<User> followings = new ArrayList<>(); //나의 구독
+    @Builder.Default
+    private List<User> followings = new ArrayList<>();
 }

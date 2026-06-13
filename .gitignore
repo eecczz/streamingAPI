@@ -40,3 +40,9 @@ out/
 .env
 .env.*
 !.env.example
+
+### Local runtime logs ###
+*.log
+
+### Runtime-uploaded files (user-generated, created at runtime) ###
+src/main/resources/static/files/uploads/
