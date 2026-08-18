@@ -26,9 +26,12 @@
 ./gradlew bootRun
 ```
 
-AWS 접근 키, DB 접속 정보 등 민감한 값은 `.env` 또는 로컬 환경 변수로 설정합니다.
+DB 접속 정보는 추적되지 않는 `.env` 또는 로컬 환경 변수로 설정합니다.
+
+AWS 인증은 코드나 Spring 설정 파일에서 키를 직접 읽지 않고 AWS SDK 기본 자격증명 체인을 사용합니다. 배포 환경에서는 EC2/ECS IAM 역할을 사용하고, 로컬에서는 AWS CLI 프로필 또는 운영체제 환경 변수를 사용하세요. 실제 AWS 키를 `.env`나 저장소 파일에 넣지 마세요.
 
 ## 저장소 관리 기준
 
 - AWS 키와 DB 비밀번호는 Git에 직접 커밋하지 않습니다.
 - `.env.example`에는 실제 값이 아닌 placeholder만 남깁니다.
+- 모든 push와 pull request에서 Gitleaks 비밀 검사를 실행합니다.

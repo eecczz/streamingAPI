@@ -41,6 +41,14 @@ out/
 .env.*
 !.env.example
 
+### Credentials and private keys ###
+.aws/
+credentials
+*.pem
+*.key
+*.p12
+*.pfx
+
 ### Local runtime logs ###
 *.log
 
